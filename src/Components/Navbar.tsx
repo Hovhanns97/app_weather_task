@@ -1,5 +1,7 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { setSearch } from "../redux/searchslice";
 
 const Bar = styled.div`
     width: 100%;
@@ -37,14 +39,12 @@ const RadioSection = styled.div`
 
 const Navbar = () => {
 
-    const onSearchChange = (e) => {
-                
-    }
+   const dispatch = useDispatch()
     return (
         <>
             <Bar>
                 <SearchSection >
-                    <Search onChange={onSearchChange}></Search>
+                    <Search onChange={(e) => dispatch(setSearch(e.target.value))}></Search>
                     <Button>Search City</Button>
                 </SearchSection>
                 <RadioSection>

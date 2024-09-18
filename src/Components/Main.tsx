@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { 
     useGetCurrentWeatherQuery, 
     useGetWeatherForecastQuery 
 } from "../redux/weatherSlice";
+import { useSelector } from "react-redux";
+
+import type { RootState } from '../redux/store'
 
 
 const WeatherBlock1 = styled.div`
@@ -92,8 +95,16 @@ const DailySection = styled.div`
 
 const Main = () => {
 
-    const { data: currentWeather, isFetching: currentFetch } = useGetCurrentWeatherQuery({city: 'Yerevan'});
-    const {data: forecastWeather, isFetching: forecastFetch } = useGetWeatherForecastQuery({city: 'Yerevan'});
+    const search = useSelector((state: RootState) => state.search)
+    
+
+    const { data: currentWeather, isFetching: currentFetch} = useGetCurrentWeatherQuery({city: 'Yerevan'});
+    const {data: forecastWeather, isFetching: forecastFetch} = useGetWeatherForecastQuery({city: 'Yerevan'});
+
+    
+    useEffect(() => {
+        
+    }, [search])
 
     return (
         <>
